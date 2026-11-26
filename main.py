@@ -24,8 +24,9 @@ LINE = "My smart fridge photographs every 2 a.m. snack for my 'weekly wellness r
 
 def main() -> int:
     # Self-check the competition gate before writing: the entry must be
-    # one line of 1-160 UTF-8 characters, not only whitespace.
-    if not 1 <= len(LINE) <= 160 or not LINE.strip():
+    # one line of 1-160 UTF-8 characters, not only whitespace, and must
+    # contain no newline of its own (the file is exactly the line).
+    if not 1 <= len(LINE) <= 160 or not LINE.strip() or "\n" in LINE or "\r" in LINE:
         print("entry line violates the 1-160 character gate", file=sys.stderr)
         return 1
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
